@@ -23,29 +23,26 @@ namespace GOTHIC_NAMESPACE
             return;
         }
 
-        if(_this->spellitems[spellNr]->amount > 0)
+        if(--_this->spellitems[spellNr]->amount > 0)
         {
-            --_this->spellitems[spellNr]->amount;
+            return;
         }
 
-        if(_this->spellitems[spellNr]->amount == 0)
+        auto item = ownerNpc->RemoveFromInv(_this->spellitems[spellNr], 0);
+        _this->wld->RemoveVob(item);
+        if(_this->spells.GetNum() == 0)
         {
-            auto item = ownerNpc->RemoveFromInv(_this->spellitems[spellNr], 0);
-            _this->wld->RemoveVob(item);
-            if(_this->spells.GetNum() == 0)
+            auto msg = zNEW(oCMsgWeapon)(oCMsgWeapon::EV_REMOVEWEAPON, 0, 0);
+            ownerNpc->GetEM()->OnMessage(msg, ownerNpc);
+        }
+        else
+        {
+            _this->spellnr = 0;
+            _this->Spell_Setup(_this->spellnr, ownerNpc, NULL);
+            auto spell = _this->GetSelectedSpell();
+            if(spell)
             {
-                auto msg = zNEW(oCMsgWeapon)(oCMsgWeapon::EV_REMOVEWEAPON, 0, 0);
-                ownerNpc->GetEM()->OnMessage(msg, ownerNpc);
-            }
-            else
-            {
-                _this->spellnr = 0;
-                _this->Spell_Setup(_this->spellnr, ownerNpc, NULL);
-                auto spell = _this->GetSelectedSpell();
-                if(spell)
-                {
-                    ogame->GetTextView()->Printwin(spell->GetName());
-                }
+                ogame->GetTextView()->Printwin(spell->GetName());
             }
         }
     }
