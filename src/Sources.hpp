@@ -1,7 +1,6 @@
 // Add your plugin files here
 #include "zVEC3.hpp"
 #include "zCModel.hpp"
-#include "oCNpc.hpp"
 #include "oCSpell_Data.hpp"
 #include "oCSpell_DataManager.hpp"
 #include "Spell_Control.hpp"

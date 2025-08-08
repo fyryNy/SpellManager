@@ -186,7 +186,6 @@ namespace GOTHIC_NAMESPACE
 
     void __fastcall oCSpell_StopTargetEffects_Inline_Setup(::Union::Registers& reg)
     {
-        ::Union::String("oCSpell_StopTargetEffects_Inline_Setup").StdPrintLine();
     #if ENGINE <= Engine_G1A
         auto spell = reinterpret_cast<oCSpell*>(reg.esi);
     #else
@@ -198,15 +197,12 @@ namespace GOTHIC_NAMESPACE
             return;
         }
 
-        ::Union::String("oCSpell_StopTargetEffects_Inline_Setup " + spell->GetName()).StdPrintLine();
-
         spell->StopTargetEffects_Union(spell->spellTarget);
     }
     auto PartialHook__oCSpell_StopTargetEffects_Inline_Setup = ::Union::CreatePartialHook(reinterpret_cast<void*>(zSwitch(0x0047c6f1, 0x00486e8d, 0x00483417, 0x00484a77)), &oCSpell_StopTargetEffects_Inline_Setup);
 
     void __fastcall oCSpell_StopTargetEffects_Inline_Cast(::Union::Registers& reg)
     {
-        ::Union::String("oCSpell_StopTargetEffects_Inline_Cast").StdPrintLine();
     #if ENGINE == Engine_G1A
         auto spell = reinterpret_cast<oCSpell*>(reg.ebp);
     #else
@@ -217,8 +213,6 @@ namespace GOTHIC_NAMESPACE
         {
             return;
         }
-
-        ::Union::String("oCSpell_StopTargetEffects_Inline_Cast " + spell->GetName()).StdPrintLine();
 
         spell->StopTargetEffects_Union(spell->spellTarget);
     }
@@ -239,7 +233,6 @@ namespace GOTHIC_NAMESPACE
 
     void __fastcall oCSpell_StopTargetEffects_Inline_Kill(::Union::Registers& reg)
     {
-        ::Union::String("oCSpell_StopTargetEffects_Inline_Kill").StdPrintLine();
     #if ENGINE == Engine_G2A
         auto spell = reinterpret_cast<oCSpell*>(reg.esi);
     #elif ENGINE <= Engine_G2
@@ -250,8 +243,6 @@ namespace GOTHIC_NAMESPACE
         {
             return;
         }
-
-        ::Union::String("oCSpell_StopTargetEffects_Inline_Kill " + spell->GetName()).StdPrintLine();
 
         spell->StopTargetEffects_Union(spell->spellTarget);
     }

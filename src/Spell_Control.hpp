@@ -17,7 +17,7 @@ namespace GOTHIC_NAMESPACE
 
         return NULL;
     }
-
+    
     zBOOL oCSpell::CastControl_Union()
     {
         if(!this->spellTargetNpc || !this->spellCasterNpc)
