@@ -2,12 +2,12 @@ namespace GOTHIC_NAMESPACE
 {
     void __fastcall oCMag_Book_Spell_Stop(::Union::Registers& reg)
     {
-        auto _this = reinterpret_cast<oCMag_Book*>(reg.esi);
+        auto magBook = reinterpret_cast<oCMag_Book*>(reg.esi);
 
-        auto ownerNpc = static_cast<oCNpc*>(_this->owner);
-        auto spellNr = _this->spellnr;
+        auto ownerNpc = static_cast<oCNpc*>(magBook->owner);
+        auto spellNr = magBook->spellnr;
 
-        auto spellData = sdManager->GetSpellData(_this->spells[spellNr]->spellID);
+        auto spellData = sdManager->GetSpellData(magBook->spells[spellNr]->spellID);
         if(!spellData)
         {
             return;
@@ -18,28 +18,28 @@ namespace GOTHIC_NAMESPACE
             return;
         }
 
-        if(!_this->spellitems[spellNr]->MultiSlot() || CurrentTelStep < 4)
+        if(!magBook->spellitems[spellNr]->MultiSlot() || CurrentTelStep < 4)
         {
             return;
         }
 
-        if(--_this->spellitems[spellNr]->amount > 0)
+        if(--magBook->spellitems[spellNr]->amount > 0)
         {
             return;
         }
 
-        auto item = ownerNpc->RemoveFromInv(_this->spellitems[spellNr], 0);
-        _this->wld->RemoveVob(item);
-        if(_this->spells.GetNum() == 0)
+        auto item = ownerNpc->RemoveFromInv(magBook->spellitems[spellNr], 0);
+        magBook->wld->RemoveVob(item);
+        if(magBook->spells.GetNum() == 0)
         {
             auto msg = zNEW(oCMsgWeapon)(oCMsgWeapon::EV_REMOVEWEAPON, 0, 0);
             ownerNpc->GetEM()->OnMessage(msg, ownerNpc);
         }
         else
         {
-            _this->spellnr = 0;
-            _this->Spell_Setup(_this->spellnr, ownerNpc, NULL);
-            auto spell = _this->GetSelectedSpell();
+            magBook->spellnr = 0;
+            magBook->Spell_Setup(magBook->spellnr, ownerNpc, NULL);
+            auto spell = magBook->GetSelectedSpell();
             if(spell)
             {
                 ogame->GetTextView()->Printwin(spell->GetName());

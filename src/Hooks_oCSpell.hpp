@@ -8,11 +8,6 @@ namespace GOTHIC_NAMESPACE
         auto spell = reinterpret_cast<oCSpell*>(reg.esi);
     #endif
 
-        if(!spell)
-        {
-            return;
-        }
-
         auto spellData = sdManager->GetSpellData(spell->spellID);
         if(!spellData)
         {
@@ -68,11 +63,6 @@ namespace GOTHIC_NAMESPACE
         auto spell = reinterpret_cast<oCSpell*>(reg.esi);
     #endif
 
-        if(!spell)
-        {
-            return;
-        }
-
         auto spellData = sdManager->GetSpellData(spell->spellID);
         if(!spellData)
         {
@@ -96,11 +86,6 @@ namespace GOTHIC_NAMESPACE
     {
         auto spell = reinterpret_cast<oCSpell*>(reg.esi);
 
-        if(!spell)
-        {
-            return;
-        }
-
         auto spellData = sdManager->GetSpellData(spell->spellID);
         if(!spellData)
         {
@@ -114,11 +99,6 @@ namespace GOTHIC_NAMESPACE
     void __fastcall oCSpell_DoTimedEffect(::Union::Registers& reg)
     {
         auto spell = reinterpret_cast<oCSpell*>(reg.esi);
-
-        if(!spell)
-        {
-            return;
-        }
 
         auto spellData = sdManager->GetSpellData(spell->spellID);
         if(!spellData)
@@ -147,25 +127,22 @@ namespace GOTHIC_NAMESPACE
         auto vob = reinterpret_cast<zCVob*>(reg.edi);
     #endif
 
-        if(!spell || !vob)
-        {
-            return;
-        }
-
         auto spellData = sdManager->GetSpellData(spell->spellID);
         if(!spellData)
         {
             return;
         }
 
-        if(spellData->GetType() == oCSpell_Data::oCSpell_Type::SPELL_TYPE_TELEKINESIS)
+        if(spellData->GetType() != oCSpell_Data::oCSpell_Type::SPELL_TYPE_TELEKINESIS)
         {
-            auto item = zDYNAMIC_CAST<oCItem>(vob);
-            if(!item)
-            {
-                spell->spellStatus = SPL_STATUS_DONTINVEST;
-                reg.eip = zSwitch(0x0047e151, 0x00488a77, 0x00484e37, 0x00486457);
-            }
+            return;
+        }
+
+        auto item = zDYNAMIC_CAST<oCItem>(vob);
+        if(!item)
+        {
+            spell->spellStatus = SPL_STATUS_DONTINVEST;
+            reg.eip = zSwitch(0x0047e151, 0x00488a77, 0x00484e37, 0x00486457);
         }
     }
     auto PartialHook__oCSpell_IsValidTarget = ::Union::CreatePartialHook(reinterpret_cast<void*>(zSwitch(0x0047e0fe, 0x00488a21, 0x00484df7, 0x00486417)), &oCSpell_IsValidTarget);
@@ -178,10 +155,12 @@ namespace GOTHIC_NAMESPACE
             return;
         }
 
-        if(spellData->GetType() == oCSpell_Data::oCSpell_Type::SPELL_TYPE_TELEKINESIS)
+        if(spellData->GetType() != oCSpell_Data::oCSpell_Type::SPELL_TYPE_TELEKINESIS)
         {
-            this->StopTelekinesis_Union(vob);
+            return;
         }
+
+        this->StopTelekinesis_Union(vob);
     }
 
     void __fastcall oCSpell_StopTargetEffects_Inline_Setup(::Union::Registers& reg)
@@ -191,11 +170,6 @@ namespace GOTHIC_NAMESPACE
     #else
         auto spell = reinterpret_cast<oCSpell*>(reg.ebp);
     #endif
-
-        if(!spell)
-        {
-            return;
-        }
 
         spell->StopTargetEffects_Union(spell->spellTarget);
     }
@@ -209,11 +183,6 @@ namespace GOTHIC_NAMESPACE
         auto spell = reinterpret_cast<oCSpell*>(reg.esi);
     #endif
 
-        if(!spell)
-        {
-            return;
-        }
-
         spell->StopTargetEffects_Union(spell->spellTarget);
     }
     auto PartialHook__oCSpell_StopTargetEffects_Inline_Cast = ::Union::CreatePartialHook(reinterpret_cast<void*>(zSwitch(0x0047d096, 0x0048788c, 0x00483e21, 0x00485481)), &oCSpell_StopTargetEffects_Inline_Cast);
@@ -221,11 +190,6 @@ namespace GOTHIC_NAMESPACE
     void __fastcall oCSpell_StopTargetEffects_Inline_Stop(::Union::Registers& reg)
     {
         auto spell = reinterpret_cast<oCSpell*>(reg.ebp);
-
-        if(!spell)
-        {
-            return;
-        }
 
         spell->StopTargetEffects_Union(spell->spellTarget);
     }
@@ -239,11 +203,6 @@ namespace GOTHIC_NAMESPACE
         auto spell = reinterpret_cast<oCSpell*>(reg.ebp);
     #endif 
 
-        if(!spell)
-        {
-            return;
-        }
-
         spell->StopTargetEffects_Union(spell->spellTarget);
     }
     auto PartialHook__oCSpell_StopTargetEffects_Inline_Kill = ::Union::CreatePartialHook(reinterpret_cast<void*>(zSwitch(0x0047d3a7, 0x00487bca, 0x00484235, 0x00485841)), &oCSpell_StopTargetEffects_Inline_Kill);
@@ -256,20 +215,17 @@ namespace GOTHIC_NAMESPACE
             return;
         }
 
-        if(spellData->GetType() == oCSpell_Data::oCSpell_Type::SPELL_TYPE_TELEKINESIS)
+        if(spellData->GetType() != oCSpell_Data::oCSpell_Type::SPELL_TYPE_TELEKINESIS)
         {
-            this->InvestTelekinesis_Union();
+            return;
         }
+
+        this->InvestTelekinesis_Union();
     }
 
     void __fastcall oCSpell_DoLogicInvestEffect_Inline_Invest(::Union::Registers& reg)
     {
         auto spell = reinterpret_cast<oCSpell*>(reg.ebp);
-
-        if(!spell)
-        {
-            return;
-        }
 
         int manaLeft = 0;
         if(spell->spellCasterNpc)

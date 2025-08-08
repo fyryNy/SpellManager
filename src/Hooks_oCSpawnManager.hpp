@@ -8,11 +8,6 @@ namespace GOTHIC_NAMESPACE
         auto npc = reinterpret_cast<oCNpc*>(reg.esi);
     #endif
 
-        if(!npc)
-        {
-            return;
-        }
-
         if(npc->HasBodyStateModifier(BS_MOD_CONTROLLING))
         {
             reg.eip = zSwitch(0x006d0dd0, 0x0070793c, 0x00719c40, 0x00779679);

@@ -3,11 +3,6 @@ namespace GOTHIC_NAMESPACE
     void __fastcall oCAIHuman_CheckActiveSpells(::Union::Registers& reg)
     {
         auto npc = *reinterpret_cast<oCNpc**>(reg.edi + 0x12c);
-        
-        if(!npc)
-        {
-            return;
-        }
 
         auto spellNode = npc->activeSpells.GetNextInList();
         while (spellNode)
