@@ -11,5 +11,5 @@
 #include "Hooks_oCSpawnManager.hpp"
 #include "Hooks_oCSpell.hpp"
 #include "Hooks_oCTriggerChangeLevel.hpp"
-#include "Hooks_oCVisualFXcpp.hpp"
+#include "Hooks_oCVisualFX.hpp"
 #include "Plugin.hpp"
