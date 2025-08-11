@@ -65,7 +65,7 @@ namespace GOTHIC_NAMESPACE
         }
     
     private:
-        struct
+        struct ParserData
         {
             int spellId;
             int spellType;

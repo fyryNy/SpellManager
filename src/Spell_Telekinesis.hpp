@@ -43,9 +43,8 @@ namespace GOTHIC_NAMESPACE
             return;
         }
 
-        if(this->manaInvested == 0)
+        if(this->manaInvested <= 0)
         {
-            CurrentTelStep = 0;
             this->spellCasterNpc->CheckForOwner(this->spellTarget);
         }
 

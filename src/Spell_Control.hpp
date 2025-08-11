@@ -15,29 +15,30 @@ namespace GOTHIC_NAMESPACE
             }
         }
 
-        return NULL;
+        return nullptr;
     }
     
-    zBOOL oCSpell::CastControl_Union()
+    bool oCSpell::CastControl_Union()
     {
         if(!this->spellTargetNpc || !this->spellCasterNpc)
         {
-            return TRUE;
+            return true;
         }
 
         if(this->saveNpc)
         {
-            zRELEASE(this->saveNpc);
+            this->saveNpc->Release();
+            this->saveNpc = nullptr;
         }
         
         this->saveNpc = this->spellCasterNpc;
-        zADDREF(this->saveNpc);
+        this->saveNpc->AddRef();
 
         this->spellCasterNpc->ModifyBodyState(BS_MOD_CONTROLLING, 0);
 
         /*if(!this->spellTargetNpc->GetAnictrl())
         {
-            return TRUE;
+            return true;
         }*/
 
         this->spellTargetNpc->GetAnictrl()->SearchStandAni(FALSE);
@@ -48,7 +49,7 @@ namespace GOTHIC_NAMESPACE
 
         this->canBeDeleted = FALSE;
 
-        return FALSE;
+        return false;
     }
 
     void oCSpell::EndControl_Union()
@@ -71,14 +72,16 @@ namespace GOTHIC_NAMESPACE
         if(this->controlWarnFX)
         {
             this->controlWarnFX->Stop(TRUE);
-            zRELEASE(this->controlWarnFX);
+            this->controlWarnFX->Release();
+            this->controlWarnFX = nullptr;
         }
 
         this->effect = this->CreateEffect();
-        this->effect->Init(this->saveNpc, NULL);
+        this->effect->Init(this->saveNpc, 0);
         this->effect->SetSpellTargetTypes(this->targetCollectType);
         this->effect->Cast(TRUE);
-        zRELEASE(effect);
+        this->effect->Release();
+        this->effect = nullptr;
 
         this->spellCasterNpc->GetEM()->OnMessage(zNEW(oCMsgWeapon)(oCMsgWeapon::EV_REMOVEWEAPON, 0, FALSE), this->spellCasterNpc);
     }
@@ -105,7 +108,8 @@ namespace GOTHIC_NAMESPACE
         else if(this->controlWarnFX)
         {
             this->controlWarnFX->Stop(TRUE);
-            zRELEASE(this->controlWarnFX);
+            this->controlWarnFX->Release();
+            this->controlWarnFX = nullptr;
         }
     }
 
@@ -144,7 +148,7 @@ namespace GOTHIC_NAMESPACE
             spell->EndTimedEffect();
         }
 
-        zBOOL isControlling = npc->HasBodyStateModifier(BS_MOD_CONTROLLING);
+        auto isControlling = npc->HasBodyStateModifier(BS_MOD_CONTROLLING);
 
         if(isControlling)
         {

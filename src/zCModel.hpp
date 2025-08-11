@@ -1,25 +1,25 @@
 namespace GOTHIC_NAMESPACE 
 {
-    zBOOL zCModel::IsAniActive_Union(const zSTRING& aniName)
+    bool zCModel::IsAniActive_Union(const zSTRING& aniName)
     {
         auto aniID = this->GetAniIDFromAniName(aniName);
         if(aniID < 0)
         {
-            return FALSE;
+            return false;
         }
 
         auto ani = this->GetAniFromAniID(aniID);
         if(!ani)
         {
-            return FALSE;
+            return false;
         }
 
         auto aniActive = this->IsAniActive(ani);
         if(!aniActive)
         {
-            return FALSE;
+            return false;
         }
 
-        return TRUE;
+        return true;
     }
 }

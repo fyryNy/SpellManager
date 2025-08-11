@@ -1,4 +1,4 @@
-zBOOL CastControl_Union();
+bool CastControl_Union();
 void EndControl_Union();
 void CheckControl_Union();
 void StopTelekinesis_Union(zCVob*);

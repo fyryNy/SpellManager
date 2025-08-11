@@ -40,30 +40,25 @@ namespace GOTHIC_NAMESPACE
 
         ~oCSpell_DataManager()
         {
-            this->sdList.clear();
+
         }
   
-        std::unique_ptr<oCSpell_Data> GetSpellData(int spellId)
+        oCSpell_Data* GetSpellData(int spellId)
         {
             if(spellId < 0)
             {
-                return NULL;
+                return nullptr;
             }
 
             for (auto& spellData : this->sdList)
             {
-                if(!spellData)
-                {
-                    continue;
-                }
-
                 if(spellData->pd.spellId == spellId)
                 {
-                    return std::move(spellData);
+                    return spellData.get();
                 }
             }
 
-            return NULL;
+            return nullptr;
         }
 
         void RestoreParserInstances()
@@ -76,10 +71,10 @@ namespace GOTHIC_NAMESPACE
 
     private:
         std::vector<std::unique_ptr<oCSpell_Data>> sdList;
-        static zBOOL size_checked;
+        static int size_checked;
     };
   
     std::unique_ptr<oCSpell_DataManager> sdManager;
 
-    zBOOL oCSpell_DataManager::size_checked = FALSE;
+    int oCSpell_DataManager::size_checked = FALSE;
 }

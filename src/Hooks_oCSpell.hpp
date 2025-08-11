@@ -119,13 +119,18 @@ namespace GOTHIC_NAMESPACE
     #if ENGINE == Engine_G1
         auto spell = reinterpret_cast<oCSpell*>(reg.ebp);
         auto vob = reinterpret_cast<zCVob*>(reg.esi);
+        auto npc = reinterpret_cast<oCNpc*>(reg.edi);
     #elif ENGINE == Engine_G1A
         auto spell = reinterpret_cast<oCSpell*>(reg.edi);
         auto vob = reinterpret_cast<zCVob*>(reg.esi);
+        auto npc = *reinterpret_cast<oCNpc**>(reg.edi + 0x34);
     #else
         auto spell = reinterpret_cast<oCSpell*>(reg.ebp);
         auto vob = reinterpret_cast<zCVob*>(reg.edi);
+        auto npc = reinterpret_cast<oCNpc*>(reg.esi);
     #endif
+
+        ::Union::String(npc->name[0]).StdPrintLine();
 
         auto spellData = sdManager->GetSpellData(spell->spellID);
         if(!spellData)
@@ -137,9 +142,9 @@ namespace GOTHIC_NAMESPACE
         {
             return;
         }
-
+ 
         auto item = zDYNAMIC_CAST<oCItem>(vob);
-        if(!item)
+        if(!item/* || spell->spellCasterNpc->GetDistanceToVob(*vob) <= 250.0f*/)
         {
             spell->spellStatus = SPL_STATUS_DONTINVEST;
             reg.eip = zSwitch(0x0047e151, 0x00488a77, 0x00484e37, 0x00486457);
@@ -149,6 +154,11 @@ namespace GOTHIC_NAMESPACE
 
     void oCSpell::StopTargetEffects_Union(zCVob* vob)
     {
+        if(!vob)
+        {
+            return;
+        }
+
         auto spellData = sdManager->GetSpellData(this->spellID);
         if(!spellData)
         {
@@ -271,7 +281,7 @@ namespace GOTHIC_NAMESPACE
             oCNpcFocus::focuslist[FOCUS_MAGIC]->i_prio = 1;
             oCNpcFocus::focuslist[FOCUS_MAGIC]->m_prio = -1;
         }
-        if(spellData && spellData->GetType() == oCSpell_Data::oCSpell_Type::SPELL_TYPE_CONTROL)
+        else if(spellData && spellData->GetType() == oCSpell_Data::oCSpell_Type::SPELL_TYPE_CONTROL)
         {
             oCNpcFocus::focuslist[FOCUS_MAGIC]->n_prio = 1;
             oCNpcFocus::focuslist[FOCUS_MAGIC]->i_prio = -1;

@@ -1,1 +1,1 @@
-zBOOL IsAniActive_Union(const zSTRING&);
+bool IsAniActive_Union(const zSTRING&);

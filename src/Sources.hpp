@@ -7,7 +7,6 @@
 #include "Spell_Telekinesis.hpp"
 #include "Hooks_oCAIHuman.hpp"
 #include "Hooks_oCGame.hpp"
-#include "Hooks_oCMag_Book.hpp"
 #include "Hooks_oCSpawnManager.hpp"
 #include "Hooks_oCSpell.hpp"
 #include "Hooks_oCTriggerChangeLevel.hpp"

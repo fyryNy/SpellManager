@@ -6,7 +6,7 @@ include(target_add_versioninfo)
 
 project(SpellManager
 	DESCRIPTION "Union plugin for Gothic Games that allows modders to create custom spells"
-	VERSION 1.0.0.0
+	VERSION 1.0.1.0
 )
 
 set(CMAKE_CXX_STANDARD 17)
