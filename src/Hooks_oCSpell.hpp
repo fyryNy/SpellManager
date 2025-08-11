@@ -130,8 +130,6 @@ namespace GOTHIC_NAMESPACE
         auto npc = reinterpret_cast<oCNpc*>(reg.esi);
     #endif
 
-        ::Union::String(npc->name[0]).StdPrintLine();
-
         auto spellData = sdManager->GetSpellData(spell->spellID);
         if(!spellData)
         {
