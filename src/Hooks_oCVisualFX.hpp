@@ -40,5 +40,5 @@ namespace GOTHIC_NAMESPACE
 
         reg.eip = zSwitch(0x00485741, 0x004908cc, 0x0048bac3, 0x0048d433);
     }
-	auto PartialHook__oCVisualFX_SetCollisionEnabled = ::Union::CreatePartialHook(reinterpret_cast<void*>(zSwitch(0x004856d4, 0x0049087e, 0x0048ba54, 0x0048d3c4)), &oCVisualFX_SetCollisionEnabled);
+	auto PartialHook__oCVisualFX_SetCollisionEnabled = ::Union::CreatePartialHook(reinterpret_cast<void*>(zSwitch(0x004856d2, 0x0049087a, 0x0048ba52, 0x0048d3c2)), &oCVisualFX_SetCollisionEnabled);
 }

@@ -1,0 +1,13 @@
+Model ("HuS")
+{
+	//.....
+
+	aniEnum
+	{
+		//.....
+		
+			ani			("t_MagRun_2_TelShoot"		1	"s_TelShoot"	0.1	0.0	M.	"Hum_MagTel_M01.asc"		F	1	74	FPS:10)
+			ani			("s_TelShoot"				1	"s_TelShoot"	0.0	0.0	M.	"Hum_MagTel_M01.asc"		F	75	75)
+			ani			("t_TelShoot_2_Stand"		1	""				0.0	0.1	M.	"Hum_MagTel_M01.asc"		F	305	349 FPS:10)
+	}
+}

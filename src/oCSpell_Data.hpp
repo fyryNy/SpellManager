@@ -20,6 +20,7 @@ namespace GOTHIC_NAMESPACE
             this->pd.spellId = -1;
             this->pd.spellType = oCSpell_Data::oCSpell_Type::SPELL_TYPE_PROJECTILE;
             this->pd.spellEnergyType = NPC_ATR_MANA;
+            this->pd.spellIsInvestSpell = 0;
 
             this->instance = -1;
 		}
@@ -63,6 +64,11 @@ namespace GOTHIC_NAMESPACE
         {
             return this->pd.spellType;
         }
+
+        int GetIsInvestSpell() const
+        {
+            return this->pd.spellIsInvestSpell;
+        }
     
     private:
         struct ParserData
@@ -70,6 +76,7 @@ namespace GOTHIC_NAMESPACE
             int spellId;
             int spellType;
             int spellEnergyType;
+            int spellIsInvestSpell;
         } pd;
     };
 }

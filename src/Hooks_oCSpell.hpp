@@ -16,8 +16,7 @@ namespace GOTHIC_NAMESPACE
 
         if(spellData->GetType() == oCSpell_Data::oCSpell_Type::SPELL_TYPE_CONTROL)
         {
-
-            if(spell->CastControl_Union())
+            if (spell->CastControl_Union())
             {
                 reg.eip = zSwitch(0x0047f312, 0x00489e3a, 0x004857b9, 0x00486dd9); // return 1
             }
@@ -34,7 +33,7 @@ namespace GOTHIC_NAMESPACE
             reg.eip = zSwitch(0x0047eefd, 0x00489986, 0x00485422, 0x00486a42);
         }
     }
-	auto PartialHook__oCSpell_CastSpecificSpell = ::Union::CreatePartialHook(reinterpret_cast<void*>(zSwitch(0x0047ed3d, 0x00489787, 0x00485413, 0x00486a33)), &oCSpell_CastSpecificSpell);
+	auto PartialHook__oCSpell_CastSpecificSpell = ::Union::CreatePartialHook(reinterpret_cast<void*>(zSwitch(0x0047ed37, 0x00489781, 0x0048540d, 0x00486a2d)), &oCSpell_CastSpecificSpell);
 
     void __fastcall oCSpell_DeleteCaster(::Union::Registers& reg)
     {
@@ -77,10 +76,11 @@ namespace GOTHIC_NAMESPACE
 
         if(spellData->GetType() == oCSpell_Data::oCSpell_Type::SPELL_TYPE_TRANSFORM)
         {
+            spell->canBeDeleted = 1;
             reg.eip = zSwitch(0x0047f510, 0x0048a047, 0x004858ca, 0x00486eea);
         }
     }
-	auto PartialHook__oCSpell_EndTimedEffect = ::Union::CreatePartialHook(reinterpret_cast<void*>(zSwitch(0x0047f3fc, 0x00489f39, 0x004858bb, 0x00486edb)), &oCSpell_EndTimedEffect);
+	auto PartialHook__oCSpell_EndTimedEffect = ::Union::CreatePartialHook(reinterpret_cast<void*>(zSwitch(0x0047f3ef, 0x00489f2c, 0x004858ae, 0x00486ece)), &oCSpell_EndTimedEffect);
 
     void __fastcall oCSpell_InitValues(::Union::Registers& reg)
     {
@@ -112,7 +112,7 @@ namespace GOTHIC_NAMESPACE
             reg.eip = zSwitch(0x0047fb23, 0x0048a726 ,0x00485ce4, 0x00487304);
         }
     }
-    auto PartialHook__oCSpell_DoTimedEffect = ::Union::CreatePartialHook(reinterpret_cast<void*>(zSwitch(0x0047f948, 0x0048a50b, 0x00485ca3, 0x004872c3)), &oCSpell_DoTimedEffect);
+    auto PartialHook__oCSpell_DoTimedEffect = ::Union::CreatePartialHook(reinterpret_cast<void*>(zSwitch(0x0047f945, 0x0048a508, 0x00485ca3, 0x004872c3)), &oCSpell_DoTimedEffect);
 
     void __fastcall oCSpell_IsValidTarget(::Union::Registers& reg)
     {
@@ -138,14 +138,13 @@ namespace GOTHIC_NAMESPACE
             return;
         }
 
-        auto item = zDYNAMIC_CAST<oCItem>(vob);
-        if(!item)
+        if(vob->type != zVOB_TYPE_ITEM)
         {
             spell->spellStatus = SPL_STATUS_DONTINVEST;
             reg.eip = zSwitch(0x0047e151, 0x00488a77, 0x00484e37, 0x00486457);
         }
     }
-    auto PartialHook__oCSpell_IsValidTarget = ::Union::CreatePartialHook(reinterpret_cast<void*>(zSwitch(0x0047e0fe, 0x00488a21, 0x00484df7, 0x00486417)), &oCSpell_IsValidTarget);
+    auto PartialHook__oCSpell_IsValidTarget = ::Union::CreatePartialHook(reinterpret_cast<void*>(zSwitch(0x0047e0f6, 0x00488a19, 0x00484def, 0x0048640f)), &oCSpell_IsValidTarget);
 
     void oCSpell::StopTargetEffects_Union(zCVob* vob)
     {
@@ -178,7 +177,7 @@ namespace GOTHIC_NAMESPACE
 
         spell->StopTargetEffects_Union(spell->spellTarget);
     }
-    auto PartialHook__oCSpell_StopTargetEffects_Inline_Setup = ::Union::CreatePartialHook(reinterpret_cast<void*>(zSwitch(0x0047c6f1, 0x00486e8d, 0x00483417, 0x00484a77)), &oCSpell_StopTargetEffects_Inline_Setup);
+    auto PartialHook__oCSpell_StopTargetEffects_Inline_Setup = ::Union::CreatePartialHook(reinterpret_cast<void*>(zSwitch(0x0047c6ee, 0x00486e8a, 0x00483417, 0x00484a77)), &oCSpell_StopTargetEffects_Inline_Setup);
 
     void __fastcall oCSpell_StopTargetEffects_Inline_Cast(::Union::Registers& reg)
     {
@@ -190,7 +189,7 @@ namespace GOTHIC_NAMESPACE
 
         spell->StopTargetEffects_Union(spell->spellTarget);
     }
-    auto PartialHook__oCSpell_StopTargetEffects_Inline_Cast = ::Union::CreatePartialHook(reinterpret_cast<void*>(zSwitch(0x0047d096, 0x0048788c, 0x00483e21, 0x00485481)), &oCSpell_StopTargetEffects_Inline_Cast);
+    auto PartialHook__oCSpell_StopTargetEffects_Inline_Cast = ::Union::CreatePartialHook(reinterpret_cast<void*>(zSwitch(0x0047d090, 0x00487886, 0x00483e21, 0x00485481)), &oCSpell_StopTargetEffects_Inline_Cast);
 
     void __fastcall oCSpell_StopTargetEffects_Inline_Stop(::Union::Registers& reg)
     {
@@ -198,7 +197,7 @@ namespace GOTHIC_NAMESPACE
 
         spell->StopTargetEffects_Union(spell->spellTarget);
     }
-    auto PartialHook__oCSpell_StopTargetEffects_Inline_Stop = ::Union::CreatePartialHook(reinterpret_cast<void*>(zSwitch(0x0047d23b, 0x00487a4e, 0x00484050, 0x004856b1)), &oCSpell_StopTargetEffects_Inline_Stop);
+    auto PartialHook__oCSpell_StopTargetEffects_Inline_Stop = ::Union::CreatePartialHook(reinterpret_cast<void*>(zSwitch(0x0047d225, 0x00487a34, 0x00484050, 0x004856b1)), &oCSpell_StopTargetEffects_Inline_Stop);
 
     void __fastcall oCSpell_StopTargetEffects_Inline_Kill(::Union::Registers& reg)
     {
@@ -210,7 +209,7 @@ namespace GOTHIC_NAMESPACE
 
         spell->StopTargetEffects_Union(spell->spellTarget);
     }
-    auto PartialHook__oCSpell_StopTargetEffects_Inline_Kill = ::Union::CreatePartialHook(reinterpret_cast<void*>(zSwitch(0x0047d3a7, 0x00487bca, 0x00484235, 0x00485841)), &oCSpell_StopTargetEffects_Inline_Kill);
+    auto PartialHook__oCSpell_StopTargetEffects_Inline_Kill = ::Union::CreatePartialHook(reinterpret_cast<void*>(zSwitch(0x0047d3a1, 0x00487bc4, 0x00484235, 0x00485841)), &oCSpell_StopTargetEffects_Inline_Kill);
 
     void oCSpell::DoLogicInvestEffect_Union()
     {
@@ -243,7 +242,7 @@ namespace GOTHIC_NAMESPACE
             spell->DoLogicInvestEffect_Union();
         }
     }
-    auto PartialHook__oCSpell_DoLogicInvestEffect_Inline_Invest = ::Union::CreatePartialHook(reinterpret_cast<void*>(zSwitch(0x0047ce5e, 0x0048764f, 0x00483b95, 0x004851ec)), &oCSpell_DoLogicInvestEffect_Inline_Invest);
+    auto PartialHook__oCSpell_DoLogicInvestEffect_Inline_Invest = ::Union::CreatePartialHook(reinterpret_cast<void*>(zSwitch(0x0047ce5a, 0x0048764b, 0x00483b91, 0x004851e8)), &oCSpell_DoLogicInvestEffect_Inline_Invest);
 
     void __fastcall oCSpell_Setup_SetPrio(::Union::Registers& reg)
     {
@@ -288,8 +287,6 @@ namespace GOTHIC_NAMESPACE
             oCNpcFocus::focuslist[FOCUS_MAGIC]->i_prio = itemPrioBackup;
             oCNpcFocus::focuslist[FOCUS_MAGIC]->m_prio = mobPrioBackup;
         }
-
-        CurrentTelStep = 0;
     }
     auto PartialHook__oCSpell_Setup_SetPrio = ::Union::CreatePartialHook(reinterpret_cast<void*>(zSwitch(0x0047c66e, 0x00486e0b, 0x0048338e, 0x004849ee)), &oCSpell_Setup_SetPrio);
 }

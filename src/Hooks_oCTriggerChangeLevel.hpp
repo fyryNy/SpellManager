@@ -28,5 +28,5 @@ namespace GOTHIC_NAMESPACE
             break;
         }
     }
-	auto PartialHook__oCTriggerChangeLevel_TriggerTarget = ::Union::CreatePartialHook(reinterpret_cast<void*>(zSwitch(0x004383b8, 0x0043cd58, 0x0043b834, 0x0043be64)), &oCTriggerChangeLevel_TriggerTarget);
+	auto PartialHook__oCTriggerChangeLevel_TriggerTarget = ::Union::CreatePartialHook(reinterpret_cast<void*>(zSwitch(0x004383b6, 0x0043cd56, 0x0043b834, 0x0043be64)), &oCTriggerChangeLevel_TriggerTarget);
 }

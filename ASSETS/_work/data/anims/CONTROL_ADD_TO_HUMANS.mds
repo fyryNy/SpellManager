@@ -1,0 +1,29 @@
+Model ("HuS")
+{
+	//.....
+
+	aniEnum
+	{
+		//.....
+		
+			ani			("t_MagRun_2_ConShoot"		1	"s_ConShoot"	0.1	0.0	M.	"Hum_MagCastCon_M01.asc"	F	1	19)
+			ani			("s_ConShoot"				1	"s_ConShoot"	0.0	0.0	M.	"Hum_MagCastCon_M01.asc"	F	20	59)
+			ani			("t_ConShoot_2_Stand"		1	""				0.0	0.1	M.	"Hum_MagCastCon_M01.asc"	F	131	139)
+
+			ani			("t_ConShoot_2_ConActive"	1	"s_ConActive"	0.0	0.0	M.	"Hum_MagCastCon_M01.asc"	F	60	79)
+			ani			("s_ConActive"				1	"s_ConActive"	0.0	0.0	M.	"Hum_MagCastCon_M01.asc"	F	80	119	FPS:10)
+			ani			("t_ConActive_2_Stand"		1	""				0.0	0.1	M.	"Hum_MagCastCon_M01.asc"	F	120	139)
+
+			ani			("s_Con_Victim"				1	"s_Con_Victim"	0.1 0.1 M.	"Hum_S_Insane_M02.asc"					F	15	69	FPS:10)
+			ani			("t_PSI_Victim"				1	"t_PSI_Victim_2_Stand"		0.2	0.0	M.	"Hum_S_Insane_M02.asc"		F	71	110	FPS:10)
+			{
+				*eventSFXGrnd	(85	"Run")
+				*eventSFXGrnd	(87	"Run")
+			}
+			ani			("t_PSI_Victim_2_Stand"		1	""							0.1	0.6	M.	"Hum_S_Insane2_M01.asc"		F	1	78	FPS:10)
+			{
+				*eventSFXGrnd	(17	"Run")
+				*eventSFXGrnd	(60	"Run")
+			}
+	}
+}

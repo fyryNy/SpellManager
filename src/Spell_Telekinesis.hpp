@@ -1,7 +1,5 @@
 namespace GOTHIC_NAMESPACE
 {
-    int CurrentTelStep = 0;
-
     void oCSpell::StopTelekinesis_Union(zCVob* vob)
     {
         if(!vob)
@@ -52,8 +50,6 @@ namespace GOTHIC_NAMESPACE
         {
             return;
         }
-
-        CurrentTelStep = this->manaInvested;
 
         float speed = 50.0f / 1000.0f;
 
