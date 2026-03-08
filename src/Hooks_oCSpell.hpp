@@ -9,12 +9,12 @@ namespace GOTHIC_NAMESPACE
     #endif
 
         auto spellData = sdManager->GetSpellData(spell->spellID);
-        if(!spellData)
+        if (!spellData)
         {
             return;
         }
 
-        if(spellData->GetType() == oCSpell_Data::oCSpell_Type::SPELL_TYPE_CONTROL)
+        if (spellData->GetType() == oCSpell_Data::oCSpell_Type::SPELL_TYPE_CONTROL)
         {
             if (spell->CastControl_Union())
             {
@@ -28,7 +28,7 @@ namespace GOTHIC_NAMESPACE
             return;
         }
 
-        if(spellData->GetType() == oCSpell_Data::oCSpell_Type::SPELL_TYPE_TRANSFORM)
+        if (spellData->GetType() == oCSpell_Data::oCSpell_Type::SPELL_TYPE_TRANSFORM)
         {
             reg.eip = zSwitch(0x0047eefd, 0x00489986, 0x00485422, 0x00486a42);
         }
@@ -40,12 +40,12 @@ namespace GOTHIC_NAMESPACE
         auto spellId = *reinterpret_cast<int*>(reg.ecx + 0x54);
 
         auto spellData = sdManager->GetSpellData(spellId);
-        if(!spellData)
+        if (!spellData)
         {
             return;
         }
 
-        if(spellData->GetType() != oCSpell_Data::oCSpell_Type::SPELL_TYPE_TRANSFORM)
+        if (spellData->GetType() != oCSpell_Data::oCSpell_Type::SPELL_TYPE_TRANSFORM)
         {
             return;
         }
@@ -63,18 +63,18 @@ namespace GOTHIC_NAMESPACE
     #endif
 
         auto spellData = sdManager->GetSpellData(spell->spellID);
-        if(!spellData)
+        if (!spellData)
         {
             return;
         }
 
-        if(spellData->GetType() == oCSpell_Data::oCSpell_Type::SPELL_TYPE_CONTROL)
+        if (spellData->GetType() == oCSpell_Data::oCSpell_Type::SPELL_TYPE_CONTROL)
         {
             spell->EndControl_Union();
             return;
         }
 
-        if(spellData->GetType() == oCSpell_Data::oCSpell_Type::SPELL_TYPE_TRANSFORM)
+        if (spellData->GetType() == oCSpell_Data::oCSpell_Type::SPELL_TYPE_TRANSFORM)
         {
             spell->canBeDeleted = 1;
             reg.eip = zSwitch(0x0047f510, 0x0048a047, 0x004858ca, 0x00486eea);
@@ -87,7 +87,7 @@ namespace GOTHIC_NAMESPACE
         auto spell = reinterpret_cast<oCSpell*>(reg.esi);
 
         auto spellData = sdManager->GetSpellData(spell->spellID);
-        if(!spellData)
+        if (!spellData)
         {
             return;
         }
@@ -101,12 +101,12 @@ namespace GOTHIC_NAMESPACE
         auto spell = reinterpret_cast<oCSpell*>(reg.esi);
 
         auto spellData = sdManager->GetSpellData(spell->spellID);
-        if(!spellData)
+        if (!spellData)
         {
             return;
         }
 
-        if(spellData->GetType() == oCSpell_Data::oCSpell_Type::SPELL_TYPE_CONTROL)
+        if (spellData->GetType() == oCSpell_Data::oCSpell_Type::SPELL_TYPE_CONTROL)
         {
             spell->CheckControl_Union();
             reg.eip = zSwitch(0x0047fb23, 0x0048a726 ,0x00485ce4, 0x00487304);
@@ -128,17 +128,17 @@ namespace GOTHIC_NAMESPACE
     #endif
 
         auto spellData = sdManager->GetSpellData(spell->spellID);
-        if(!spellData)
+        if (!spellData)
         {
             return;
         }
 
-        if(spellData->GetType() != oCSpell_Data::oCSpell_Type::SPELL_TYPE_TELEKINESIS)
+        if (spellData->GetType() != oCSpell_Data::oCSpell_Type::SPELL_TYPE_TELEKINESIS)
         {
             return;
         }
 
-        if(vob->type != zVOB_TYPE_ITEM)
+        if (vob->type != zVOB_TYPE_ITEM)
         {
             spell->spellStatus = SPL_STATUS_DONTINVEST;
             reg.eip = zSwitch(0x0047e151, 0x00488a77, 0x00484e37, 0x00486457);
@@ -148,18 +148,18 @@ namespace GOTHIC_NAMESPACE
 
     void oCSpell::StopTargetEffects_Union(zCVob* vob)
     {
-        if(!vob)
+        if (!vob)
         {
             return;
         }
 
         auto spellData = sdManager->GetSpellData(this->spellID);
-        if(!spellData)
+        if (!spellData)
         {
             return;
         }
 
-        if(spellData->GetType() != oCSpell_Data::oCSpell_Type::SPELL_TYPE_TELEKINESIS)
+        if (spellData->GetType() != oCSpell_Data::oCSpell_Type::SPELL_TYPE_TELEKINESIS)
         {
             return;
         }
@@ -214,12 +214,12 @@ namespace GOTHIC_NAMESPACE
     void oCSpell::DoLogicInvestEffect_Union()
     {
         auto spellData = sdManager->GetSpellData(this->spellID);
-        if(!spellData)
+        if (!spellData)
         {
             return;
         }
 
-        if(spellData->GetType() != oCSpell_Data::oCSpell_Type::SPELL_TYPE_TELEKINESIS)
+        if (spellData->GetType() != oCSpell_Data::oCSpell_Type::SPELL_TYPE_TELEKINESIS)
         {
             return;
         }
@@ -232,12 +232,12 @@ namespace GOTHIC_NAMESPACE
         auto spell = reinterpret_cast<oCSpell*>(reg.ebp);
 
         int manaLeft = 0;
-        if(spell->spellCasterNpc)
+        if (spell->spellCasterNpc)
         {
             manaLeft = spell->spellCasterNpc->GetAttribute(spell->spellEnergy);
         }
 
-        if(manaLeft > 0)
+        if (manaLeft > 0)
         {
             spell->DoLogicInvestEffect_Union();
         }
@@ -246,7 +246,7 @@ namespace GOTHIC_NAMESPACE
 
     void __fastcall oCSpell_Setup_SetPrio(::Union::Registers& reg)
     {
-        if(!oCNpcFocus::focuslist[FOCUS_MAGIC])
+        if (!oCNpcFocus::focuslist[FOCUS_MAGIC])
         {
             return;
         }
@@ -260,7 +260,7 @@ namespace GOTHIC_NAMESPACE
         static int npcPrioBackup = -666;
         static int itemPrioBackup = -666;
         static int mobPrioBackup = -666;
-        if(npcPrioBackup == -666 || itemPrioBackup == -666 || mobPrioBackup == -666)
+        if (npcPrioBackup == -666 || itemPrioBackup == -666 || mobPrioBackup == -666)
         {
             npcPrioBackup = oCNpcFocus::focuslist[FOCUS_MAGIC]->n_prio;
             itemPrioBackup = oCNpcFocus::focuslist[FOCUS_MAGIC]->i_prio ;
@@ -269,13 +269,13 @@ namespace GOTHIC_NAMESPACE
 
         auto spellData = sdManager->GetSpellData(spell->spellID);
 
-        if(spellData && spellData->GetType() == oCSpell_Data::oCSpell_Type::SPELL_TYPE_TELEKINESIS)
+        if (spellData && spellData->GetType() == oCSpell_Data::oCSpell_Type::SPELL_TYPE_TELEKINESIS)
         {
             oCNpcFocus::focuslist[FOCUS_MAGIC]->n_prio = -1;
             oCNpcFocus::focuslist[FOCUS_MAGIC]->i_prio = 1;
             oCNpcFocus::focuslist[FOCUS_MAGIC]->m_prio = -1;
         }
-        else if(spellData && spellData->GetType() == oCSpell_Data::oCSpell_Type::SPELL_TYPE_CONTROL)
+        else if (spellData && spellData->GetType() == oCSpell_Data::oCSpell_Type::SPELL_TYPE_CONTROL)
         {
             oCNpcFocus::focuslist[FOCUS_MAGIC]->n_prio = 1;
             oCNpcFocus::focuslist[FOCUS_MAGIC]->i_prio = -1;

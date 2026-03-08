@@ -3,7 +3,7 @@ namespace GOTHIC_NAMESPACE
     void __fastcall oCVisualFX_SetCollisionEnabled(::Union::Registers& reg)
     {
         auto vfx = reinterpret_cast<oCVisualFX*>(reg.esi);
-        if(!vfx)
+        if (!vfx)
         {
             return;
         }
@@ -11,19 +11,19 @@ namespace GOTHIC_NAMESPACE
         auto spellId = vfx->GetSpellType();
 
         auto spellData = sdManager->GetSpellData(spellId);
-        if(!spellData)
+        if (!spellData)
         {
             return;
         }
 
-        if(spellData->GetType() == oCSpell_Data::oCSpell_Type::SPELL_TYPE_PROJECTILE)
+        if (spellData->GetType() == oCSpell_Data::oCSpell_Type::SPELL_TYPE_PROJECTILE)
         {
             vfx->SetIsProjectile(TRUE);
             vfx->SetCollisionClass(zCCollObjectProjectile::S_GetCollObjClass());
         }
-        else if(spellData->GetType() == oCSpell_Data::oCSpell_Type::SPELL_TYPE_SPREAD)
+        else if (spellData->GetType() == oCSpell_Data::oCSpell_Type::SPELL_TYPE_SPREAD)
         {
-            if(vfx->visName_S.Search("_SPREAD", 1U) != -1)
+            if (vfx->visName_S.Search("_SPREAD", 1U) != -1)
             {
                 vfx->SetCollisionClass(zCCollObjectBoxPassThrough::S_GetCollObjClass());
             }
@@ -41,4 +41,34 @@ namespace GOTHIC_NAMESPACE
         reg.eip = zSwitch(0x00485741, 0x004908cc, 0x0048bac3, 0x0048d433);
     }
 	auto PartialHook__oCVisualFX_SetCollisionEnabled = ::Union::CreatePartialHook(reinterpret_cast<void*>(zSwitch(0x004856d2, 0x0049087a, 0x0048ba52, 0x0048d3c2)), &oCVisualFX_SetCollisionEnabled);
+
+    void __fastcall oCVisualFX_InitEffect(::Union::Registers& reg)
+    {
+        auto vfx = reinterpret_cast<oCVisualFX*>(reg.esi);
+        if (!vfx)
+        {
+            return;
+        }
+
+        auto spellId = vfx->GetSpellType();
+
+        auto spellData = sdManager->GetSpellData(spellId);
+        if (!spellData)
+        {
+            return;
+        }
+
+        if (spellData->GetType() == oCSpell_Data::oCSpell_Type::SPELL_TYPE_PROJECTILE)
+        {
+            vfx->SetIsProjectile(TRUE);
+        }
+        else if (spellData->GetType() == oCSpell_Data::oCSpell_Type::SPELL_TYPE_SPREAD)
+        {
+            if (vfx->visName_S.Search("_SPREAD", 1U) == -1)
+            {
+                vfx->SetIsProjectile(TRUE);
+            }
+        }
+    }
+	auto PartialHook__oCVisualFX_InitEffect = ::Union::CreatePartialHook(reinterpret_cast<void*>(zSwitch(0x0048c657, 0x0, 0x0, 0x00494bbd)), &oCVisualFX_InitEffect);
 }

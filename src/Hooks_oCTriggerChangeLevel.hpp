@@ -7,18 +7,18 @@ namespace GOTHIC_NAMESPACE
         {
             auto spell = spellNode->GetData();
             spellNode = spellNode->GetNextInList();
-            if(!spell)
+            if (!spell)
             {
                 continue;
             }
 
             auto spellData = sdManager->GetSpellData(spell->GetSpellID());
-            if(!spellData)
+            if (!spellData)
             {
                 continue;
             }
 
-            if(spellData->GetType() != oCSpell_Data::oCSpell_Type::SPELL_TYPE_TRANSFORM)
+            if (spellData->GetType() != oCSpell_Data::oCSpell_Type::SPELL_TYPE_TRANSFORM)
             {
                 continue;
             }

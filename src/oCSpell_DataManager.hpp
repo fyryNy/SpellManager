@@ -5,14 +5,14 @@ namespace GOTHIC_NAMESPACE
     public:
         oCSpell_DataManager()
         {
-            if(!parser)
+            if (!parser)
             {
                 return;
             }
 
             auto className = zSTRING{ "C_SPELL_DATA" };
             auto classIndex = parser->GetIndex(className);
-            if(classIndex < 0)
+            if (classIndex < 0)
             {
                 return;
             }
@@ -21,11 +21,11 @@ namespace GOTHIC_NAMESPACE
             while (pos >= 0)
             {
                 pos = parser->GetInstance(classIndex, pos + 1);
-                if(pos >= 0)
+                if (pos >= 0)
                 {
                     auto spellData = std::make_unique<oCSpell_Data>();
 
-                    if(!this->size_checked)
+                    if (!this->size_checked)
                     {
                         parser->CheckClassSize(className, spellData->GetDataSize());
                         this->size_checked = TRUE;
@@ -45,14 +45,14 @@ namespace GOTHIC_NAMESPACE
   
         oCSpell_Data* GetSpellData(int spellId)
         {
-            if(spellId < 0)
+            if (spellId < 0)
             {
                 return nullptr;
             }
 
             for (auto& spellData : this->sdList)
             {
-                if(spellData->pd.spellId == spellId)
+                if (spellData->pd.spellId == spellId)
                 {
                     return spellData.get();
                 }

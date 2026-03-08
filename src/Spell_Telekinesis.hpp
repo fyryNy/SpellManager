@@ -2,18 +2,18 @@ namespace GOTHIC_NAMESPACE
 {
     void oCSpell::StopTelekinesis_Union(zCVob* vob)
     {
-        if(!vob)
+        if (!vob)
         {
             return;
         }
 
-        if(!vob->GetHomeWorld())
+        if (!vob->GetHomeWorld())
         {
             return;
         }
 
         auto groundVec = zVEC3(0.0f, -(vob->GetPositionWorld()[VY] - vob->bbox3D.mins[VY]), 0.0f);
-        if(!vob->GetHomeWorld()->TraceRayNearestHit(vob->GetPositionWorld(), groundVec + zVEC3(0.0f, -1.0f, 0.0f), vob, zTRACERAY_VOB_IGNORE_CHARACTER | zTRACERAY_VOB_IGNORE_NO_CD_DYN))
+        if (!vob->GetHomeWorld()->TraceRayNearestHit(vob->GetPositionWorld(), groundVec + zVEC3(0.0f, -1.0f, 0.0f), vob, zTRACERAY_VOB_IGNORE_CHARACTER | zTRACERAY_VOB_IGNORE_NO_CD_DYN))
         {
             vob->SetPhysicsEnabled(TRUE);
             vob->GetRigidBody()->gravityOn = TRUE;
@@ -22,7 +22,7 @@ namespace GOTHIC_NAMESPACE
         }
 
         auto item = zDYNAMIC_CAST<oCItem>(vob);
-        if(item && this->spellCasterNpc->GetDistanceToVob(*vob) <= 250.0f)
+        if (item && this->spellCasterNpc->GetDistanceToVob(*vob) <= 250.0f)
         {
             auto msg = new oCMsgManipulate(oCMsgManipulate::EV_TAKEVOB, item);
             this->spellCasterNpc->GetEM()->OnMessage(msg, this->spellCasterNpc);
@@ -31,22 +31,22 @@ namespace GOTHIC_NAMESPACE
 
     void oCSpell::InvestTelekinesis_Union()
     {
-        if(!this->spellCasterNpc)
+        if (!this->spellCasterNpc)
         {
             return;
         }
 
-        if(!this->spellTarget)
+        if (!this->spellTarget)
         {
             return;
         }
 
-        if(this->manaInvested <= 0)
+        if (this->manaInvested <= 0)
         {
             this->spellCasterNpc->CheckForOwner(this->spellTarget);
         }
 
-        if(!this->spellCasterNpc->GetModel()->IsAniActive_Union("S_TELSHOOT"))
+        if (!this->spellCasterNpc->GetModel()->IsAniActive_Union("S_TELSHOOT"))
         {
             return;
         }
@@ -61,9 +61,9 @@ namespace GOTHIC_NAMESPACE
 
         auto right = zVEC3(0.0f, 1.0f, 0.0f) ^ add;
 
-        if(zinput->GetState(GAME_UP))
+        if (zinput->GetState(GAME_UP))
         {
-            if((this->spellTarget->GetPositionWorld() - this->spellCasterNpc->GetPositionWorld()).LengthApprox() > 200.0f)
+            if ((this->spellTarget->GetPositionWorld() - this->spellCasterNpc->GetPositionWorld()).LengthApprox() > 200.0f)
             {
                 move += -add;
             }
@@ -74,20 +74,20 @@ namespace GOTHIC_NAMESPACE
             }
         }
 
-        /*if(zinput->GetState(GAME_LEFT) || zinput->GetState(GAME_STRAFELEFT))
+        /*if (zinput->GetState(GAME_LEFT) || zinput->GetState(GAME_STRAFELEFT))
         {
             move += -right;
         }
-        else if(zinput->GetState(GAME_RIGHT) || zinput->GetState(GAME_STRAFERIGHT))
+        else if (zinput->GetState(GAME_RIGHT) || zinput->GetState(GAME_STRAFERIGHT))
         {
             move += right;
         }
 
-        if(zinput->GetState(GAME_SLOW))
+        if (zinput->GetState(GAME_SLOW))
         {
             move += zVEC3(0.0f, 1.0f, 0.0f);
         }
-        else if(zinput->GetState(GAME_SMOVE))
+        else if (zinput->GetState(GAME_SMOVE))
         {
             move += zVEC3(0.0f, -1.0f, 0.0f);
         }*/
@@ -97,7 +97,7 @@ namespace GOTHIC_NAMESPACE
         auto itemPos = this->spellTarget->GetPositionWorld();
         auto npcPos = this->spellCasterNpc->bbox3D.maxs;
 
-        if(itemPos[VY] < npcPos[VY])
+        if (itemPos[VY] < npcPos[VY])
         {
             move += zVEC3(0.0f, 1.0f, 0.0f);
             this->up += fac;
@@ -105,11 +105,11 @@ namespace GOTHIC_NAMESPACE
 
         itemPos += move * fac;
 
-        if(itemPos[VY] >= npcPos[VY])
+        if (itemPos[VY] >= npcPos[VY])
         {
             this->hoverY += this->hoverDir * ztimer->frameTimeFloat * speed / 4;
 
-            if(this->hoverY <= -5.0f || this->hoverY >= 5.0f)
+            if (this->hoverY <= -5.0f || this->hoverY >= 5.0f)
             {
                 this->hoverDir = -this->hoverDir;
             }
@@ -121,7 +121,7 @@ namespace GOTHIC_NAMESPACE
         auto curPos = itemPos + move;
 
         int inMove = this->spellCasterNpc->isInMovementMode;
-        if(inMove)
+        if (inMove)
         {
             this->spellCasterNpc->EndMovement(
             #if ENGINE == Engine_G2A
@@ -132,7 +132,7 @@ namespace GOTHIC_NAMESPACE
 
         this->spellTarget->SetPositionWorld(curPos);
 
-        if(inMove)
+        if (inMove)
         {
             this->spellCasterNpc->BeginMovement();
         }

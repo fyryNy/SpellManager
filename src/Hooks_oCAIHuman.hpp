@@ -10,18 +10,18 @@ namespace GOTHIC_NAMESPACE
             auto spell = spellNode->GetData();
             spellNode = spellNode->GetNextInList();
 
-            if(!spell)
+            if (!spell)
             {
                 continue;
             }
 
             auto spellData = sdManager->GetSpellData(spell->spellID);
-            if(!spellData)
+            if (!spellData)
             {
                 return;
             }
 
-            if(spellData->GetType() == oCSpell_Data::oCSpell_Type::SPELL_TYPE_CONTROL
+            if (spellData->GetType() == oCSpell_Data::oCSpell_Type::SPELL_TYPE_CONTROL
             || spellData->GetType() == oCSpell_Data::oCSpell_Type::SPELL_TYPE_TRANSFORM)
             {
                 spell->EndTimedEffect();
@@ -40,24 +40,24 @@ namespace GOTHIC_NAMESPACE
         auto spellNr = magBook->spellnr;
 
         auto spellData = sdManager->GetSpellData(magBook->spells[spellNr]->spellID);
-        if(!spellData)
+        if (!spellData)
         {
             return;
         }
 
-        if(!spellData->GetIsInvestSpell())
+        if (!spellData->GetIsInvestSpell())
         {
             return;
         }
 
         auto spellItem = magBook->spellitems[spellNr];
 
-        if(!spellItem->MultiSlot())
+        if (!spellItem->MultiSlot())
         {
             return;
         }
 
-        if(--spellItem->amount > 0)
+        if (--spellItem->amount > 0)
         {
             return;
         }
@@ -65,12 +65,12 @@ namespace GOTHIC_NAMESPACE
         auto item = ownerNpc->RemoveFromInv(spellItem, 0);
         magBook->wld->RemoveVob(item);
         
-        if(magBook->spells.GetNum() > 0)
+        if (magBook->spells.GetNum() > 0)
         {
             magBook->spellnr = 0;
             magBook->Spell_Setup(magBook->spellnr, ownerNpc, nullptr);
             auto spell = magBook->GetSelectedSpell();
-            if(spell)
+            if (spell)
             {
                 ogame->GetTextView()->Printwin(spell->GetName());
             }
@@ -88,12 +88,12 @@ namespace GOTHIC_NAMESPACE
         auto spell = reinterpret_cast<oCSpell*>(reg.ecx);
 
         auto spellData = sdManager->GetSpellData(spell->spellID);
-        if(!spellData)
+        if (!spellData)
         {
             return;
         }
 
-        if(!spellData->GetIsInvestSpell())
+        if (!spellData->GetIsInvestSpell())
         {
             return;
         }

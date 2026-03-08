@@ -3,13 +3,13 @@ namespace GOTHIC_NAMESPACE
     oCSpell* oCNpc::GetActiveSpellControl_Union()
     {
         auto spellNode = this->activeSpells.GetNextInList();
-        while(spellNode)
+        while (spellNode)
         {
             auto spell = spellNode->GetData();
             spellNode = spellNode->GetNextInList();
 
             auto spellData = sdManager->GetSpellData(spell->spellID);
-            if(spellData && spellData->GetType() == oCSpell_Data::oCSpell_Type::SPELL_TYPE_CONTROL)
+            if (spellData && spellData->GetType() == oCSpell_Data::oCSpell_Type::SPELL_TYPE_CONTROL)
             {
                 return spell;
             }
@@ -20,12 +20,12 @@ namespace GOTHIC_NAMESPACE
     
     bool oCSpell::CastControl_Union()
     {
-        if(!this->spellTargetNpc || !this->spellCasterNpc)
+        if (!this->spellTargetNpc || !this->spellCasterNpc)
         {
-            return true;
+            return false;
         }
 
-        if(this->saveNpc)
+        if (this->saveNpc)
         {
             this->saveNpc->Release();
             this->saveNpc = nullptr;
@@ -36,7 +36,7 @@ namespace GOTHIC_NAMESPACE
 
         this->spellCasterNpc->ModifyBodyState(BS_MOD_CONTROLLING, 0);
 
-        /*if(!this->spellTargetNpc->GetAnictrl())
+        /*if (!this->spellTargetNpc->GetAnictrl())
         {
             return true;
         }*/
@@ -49,12 +49,12 @@ namespace GOTHIC_NAMESPACE
 
         this->canBeDeleted = FALSE;
 
-        return false;
+        return true;
     }
 
     void oCSpell::EndControl_Union()
     {
-        if(!this->saveNpc || !this->spellTargetNpc)
+        if (!this->saveNpc || !this->spellTargetNpc)
         {
             return;
         }
@@ -69,7 +69,7 @@ namespace GOTHIC_NAMESPACE
         this->saveNpc->StandUp(FALSE, TRUE);
         this->saveNpc->SetSleeping(FALSE);
 
-        if(this->controlWarnFX)
+        if (this->controlWarnFX)
         {
             this->controlWarnFX->Stop(TRUE);
             this->controlWarnFX->Release();
@@ -88,24 +88,24 @@ namespace GOTHIC_NAMESPACE
 
     void oCSpell::CheckControl_Union()
     {
-        if(!this->saveNpc || !this->spellTargetNpc)
+        if (!this->saveNpc || !this->spellTargetNpc)
         {
             return;
         }
         
-        if(this->spellTargetNpc->attribute[NPC_ATR_HITPOINTS] <= 0 || this->spellTargetNpc->GetDistanceToVob2(*this->saveNpc) >= (4000.0f * 4000.0f))
+        if (this->spellTargetNpc->attribute[NPC_ATR_HITPOINTS] <= 0 || this->spellTargetNpc->GetDistanceToVob2(*this->saveNpc) >= (4000.0f * 4000.0f))
         {
             this->canBeDeleted = TRUE;
             this->EndTimedEffect();
         }
-        else if(this->spellTargetNpc->GetDistanceToVob2(*this->saveNpc) >= (3500.0f * 3500.0f))
+        else if (this->spellTargetNpc->GetDistanceToVob2(*this->saveNpc) >= (3500.0f * 3500.0f))
         {
-            if(!this->controlWarnFX)
+            if (!this->controlWarnFX)
             {
                 this->controlWarnFX = oCVisualFX::CreateAndPlay("CONTROL_LEAVERANGEFX", this->spellTargetNpc->GetPositionWorld(), nullptr, 1, 0.0f, 0, FALSE);
             }
         }
-        else if(this->controlWarnFX)
+        else if (this->controlWarnFX)
         {
             this->controlWarnFX->Stop(TRUE);
             this->controlWarnFX->Release();
@@ -121,7 +121,7 @@ namespace GOTHIC_NAMESPACE
         auto npc = reinterpret_cast<oCNpc*>(reg.edi);
     #endif
 
-        if(!npc)
+        if (!npc)
         {
             return;
         }
@@ -137,20 +137,20 @@ namespace GOTHIC_NAMESPACE
         oCSpell* spell = nullptr;
         oCNpc* npcTarget = nullptr;
 
-        if(descDamage.pNpcAttacker)
+        if (descDamage.pNpcAttacker)
         {
             spell = descDamage.pNpcAttacker->GetActiveSpellControl_Union();
             npcTarget = spell ? spell->spellTargetNpc : nullptr;
         }
 
-        if(spell && npcTarget && npc->attribute[NPC_ATR_HITPOINTS] <= 0)
+        if (spell && npcTarget && npc->attribute[NPC_ATR_HITPOINTS] <= 0)
         {
             spell->EndTimedEffect();
         }
 
         auto isControlling = npc->HasBodyStateModifier(BS_MOD_CONTROLLING);
 
-        if(isControlling)
+        if (isControlling)
         {
             spell = player->GetActiveSpellControl_Union();
             spell->EndTimedEffect();
