@@ -2,7 +2,11 @@ namespace GOTHIC_NAMESPACE
 {
     void __fastcall oCSpawnManager_CheckRemoveNpc(::Union::Registers& reg)
     {
-        auto npc = reinterpret_cast<oCNpc*>(reg.ecx);
+    #if ENGINE == Engine_G1A
+        auto npc = reinterpret_cast<oCNpc*>(reg.edi);
+    #else
+        auto npc = reinterpret_cast<oCNpc*>(reg.esi);
+    #endif
 
         if (!npc)
         {
