@@ -1,3 +1,6 @@
+[1.0.3]
+- Fixed wrong register usage in `oCSpawnManager_CheckRemoveNpc`
+
 [1.0.2]
 - Fixed some addresses
 - Added new field to `C_SPELL_DATA` class: `spellIsInvestSpell`
