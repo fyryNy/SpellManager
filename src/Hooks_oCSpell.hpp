@@ -52,7 +52,7 @@ namespace GOTHIC_NAMESPACE
 
         reg.eip = zSwitch(0x0047fb65, 0x0048a765, 0x00485d0d, 0x0048732d);
     }
-	auto PartialHook__oCSpell_DeleteCaster = ::Union::CreatePartialHook(reinterpret_cast<void*>(zSwitch(0x0047fb53, 0x0048a753, 0x00485d03, 0x00487323)), &oCSpell_DeleteCaster);
+	auto PartialHook__oCSpell_DeleteCaster = ::Union::CreatePartialHook(reinterpret_cast<void*>(zSwitch(0x0047fb50, 0x0048a750, 0x00485d00, 0x00487320)), &oCSpell_DeleteCaster);
 
     void __fastcall oCSpell_EndTimedEffect(::Union::Registers& reg)
     {

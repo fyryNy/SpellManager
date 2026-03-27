@@ -1,3 +1,6 @@
+[1.0.4]
+- Moved `oCSpell:DeleteCaster` hook to the beginning of the func
+
 [1.0.3]
 - Fixed wrong register usage in `oCSpawnManager_CheckRemoveNpc`
 
