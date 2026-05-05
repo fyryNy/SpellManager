@@ -8,6 +8,11 @@ namespace GOTHIC_NAMESPACE
             auto spell = spellNode->GetData();
             spellNode = spellNode->GetNextInList();
 
+            if (!spell)
+            {
+                continue;
+            }
+
             auto spellData = sdManager->GetSpellData(spell->spellID);
             if (spellData && spellData->GetType() == oCSpell_Data::oCSpell_Type::SPELL_TYPE_CONTROL)
             {
@@ -153,7 +158,10 @@ namespace GOTHIC_NAMESPACE
         if (isControlling)
         {
             spell = player->GetActiveSpellControl_Union();
-            spell->EndTimedEffect();
+            if (spell)
+            {
+                spell->EndTimedEffect();
+            }
         }
     }
     auto PartialHook__oCNpc_OnDamage_Events_Control = ::Union::CreatePartialHook(reinterpret_cast<void*>(zSwitch(0x00747610, 0x00788421, 0x00792414, 0x0067b7c4)), &oCNpc_OnDamage_Events_Control);

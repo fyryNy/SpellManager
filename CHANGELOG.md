@@ -1,3 +1,6 @@
+[1.0.4.1]
+- Small fix for a while loop in `oCAIHuman::CheckActiveSpells`
+
 [1.0.4]
 - Moved `oCSpell:DeleteCaster` hook to the beginning of the func
 

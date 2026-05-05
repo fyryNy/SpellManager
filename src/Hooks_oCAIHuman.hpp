@@ -18,7 +18,7 @@ namespace GOTHIC_NAMESPACE
             auto spellData = sdManager->GetSpellData(spell->spellID);
             if (!spellData)
             {
-                return;
+                continue;
             }
 
             if (spellData->GetType() == oCSpell_Data::oCSpell_Type::SPELL_TYPE_CONTROL
