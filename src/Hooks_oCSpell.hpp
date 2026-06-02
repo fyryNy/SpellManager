@@ -56,7 +56,7 @@ namespace GOTHIC_NAMESPACE
 
     void __fastcall oCSpell_EndTimedEffect(::Union::Registers& reg)
     {
-    #if ENGINE == Engine_G1A
+    #if ENGINE <= Engine_G1A
         auto spell = reinterpret_cast<oCSpell*>(reg.ebp);
     #else
         auto spell = reinterpret_cast<oCSpell*>(reg.esi);

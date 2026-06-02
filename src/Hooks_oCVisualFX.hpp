@@ -70,5 +70,5 @@ namespace GOTHIC_NAMESPACE
             }
         }
     }
-	auto PartialHook__oCVisualFX_InitEffect = ::Union::CreatePartialHook(reinterpret_cast<void*>(zSwitch(0x0048c657, 0x0, 0x0, 0x00494bbd)), &oCVisualFX_InitEffect);
+	auto PartialHook__oCVisualFX_InitEffect = ::Union::CreatePartialHook(reinterpret_cast<void*>(zSwitch(0x0048c657, 0x0049800e, 0x00493003, 0x00494bbd)), &oCVisualFX_InitEffect);
 }

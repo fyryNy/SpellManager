@@ -1,3 +1,7 @@
+[1.0.5]
+- Added missing addresses for Gothic Sequel and Gothic 2 Classic in `oCVisualFX::InitEffect` hook
+- Fixed wrong register for Gothic 1 in `oCSpell::EndTimedEffect` hook
+
 [1.0.4.1]
 - Small fix for a while loop in `oCAIHuman::CheckActiveSpells`
 
