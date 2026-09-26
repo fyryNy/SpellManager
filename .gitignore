@@ -7,3 +7,5 @@
 # Build directories
 
 /out/
+
+*.code-workspace

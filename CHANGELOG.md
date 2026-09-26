@@ -1,3 +1,7 @@
+[1.0.5.1]
+- Updated gothic-api and union-api
+- Added README with instructions on how to use the plugin
+
 [1.0.5]
 - Added missing addresses for Gothic Sequel and Gothic 2 Classic in `oCVisualFX::InitEffect` hook
 - Fixed wrong register for Gothic 1 in `oCSpell::EndTimedEffect` hook
