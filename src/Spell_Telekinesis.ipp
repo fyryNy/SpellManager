@@ -1,3 +1,5 @@
+#include "oCSpell_DataManager.h"
+
 namespace GOTHIC_NAMESPACE
 {
     void oCSpell::StopTelekinesis_Union(zCVob* vob)
@@ -118,7 +120,7 @@ namespace GOTHIC_NAMESPACE
             this->hoverOld = this->hoverY;
         }
 
-        auto curPos = itemPos + move;
+        //auto curPos = itemPos + move;
 
         int inMove = this->spellCasterNpc->isInMovementMode;
         if (inMove)
@@ -130,7 +132,7 @@ namespace GOTHIC_NAMESPACE
             );
         }
 
-        this->spellTarget->SetPositionWorld(curPos);
+        this->spellTarget->SetPositionWorld(itemPos);
 
         if (inMove)
         {

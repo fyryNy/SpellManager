@@ -1,11 +1,23 @@
-# Visual Studio
+# Project specific local files
+.vs/*
+!.vs/launch.vs.json
 
-/.vs/
-/.vscode/
-/.idea/
+.vscode/*
+!.vscode/c_cpp_properties.json
+.idea/
 
 # Build directories
 
 /out/
+/compile_commands.json
+
+# Build files
+
+*.dll
+*.vdf
+
+# CMake user config
+
+CMakeUserConfigPresets.json
 
 *.code-workspace

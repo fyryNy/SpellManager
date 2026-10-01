@@ -1,3 +1,5 @@
+#include "oCSpell_DataManager.h"
+
 namespace GOTHIC_NAMESPACE 
 {
     void __fastcall oCSpell_CastSpecificSpell(::Union::Registers& reg)

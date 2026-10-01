@@ -1,3 +1,5 @@
+#include "oCSpell_DataManager.h"
+
 namespace GOTHIC_NAMESPACE 
 {
 	void Game_Init()

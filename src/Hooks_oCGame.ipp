@@ -1,3 +1,5 @@
+#include "oCSpell_DataManager.h"
+
 namespace GOTHIC_NAMESPACE 
 {
     void __fastcall oCGame_ChangeLevel(::Union::Registers& reg)
