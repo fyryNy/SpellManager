@@ -16,8 +16,5 @@
 *.dll
 *.vdf
 
-# CMake user config
-
-CMakeUserConfigPresets.json
 
 *.code-workspace
